@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://ta676wjjouhp"]
+
+[ext_resource type="Texture2D" uid="uid://ce7si241hpaod" path="res://art/starting_ship/starting_ship_frame_1.png" id="1_atity"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_vm0l1"]
+[ext_resource type="Texture2D" uid="uid://divgoptxkm8rr" path="res://art/starting_ship/starting_ship_frame_2.png" id="2_o1fx0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lnpxe"]
+animations = [{
+"frames": [{
+"duration": 0.6,
+"texture": ExtResource("1_atity")
+}, {
+"duration": 0.7,
+"texture": ExtResource("2_o1fx0")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[node name="starting_ship" type="CharacterBody2D"]
+position = Vector2(123, 185)
+motion_mode = 1
+script = ExtResource("1_vm0l1")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_lnpxe")
+animation = &"flying"
+frame_progress = 0.968438
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.5708
+polygon = PackedVector2Array(-12, 4, 12, 4, 16, 11, 23, 11, 25, 10, 1, -37, -1, -37, -25, 10, -23, 11, -15, 11)
