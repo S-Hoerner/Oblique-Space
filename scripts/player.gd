@@ -7,7 +7,7 @@ signal hit
 @export var acceleration = 0.075
 @export var rotation_speed = 1000
 @export var life = 10
-@export var invinc_time = 0.25
+@export var invinc_time = 0.1
 var linear_direction
 var rotation_direction
 var applied_force
@@ -18,6 +18,7 @@ var invincible
 func _ready():
 	player_not_dead()
 	$invincible_animated.hide()
+	$hit_sprite.hide()
 
 func _physics_process(delta):
 	if dead == false:
@@ -28,16 +29,17 @@ func _physics_process(delta):
 		applied_force = Vector2(0,speed).rotated(rotation)*linear_direction
 		
 		if Input.is_action_pressed("slow"):
-			sleeping = false
+			#sleeping = false
 			apply_central_force(applied_force/4)
 			apply_torque(rotation_speed*rotation_direction/4)
 			pass
-		elif Input.is_action_pressed("stop"):
+		elif Input.is_action_just_pressed("stop"):
 			#set_linear_damp(1)
 			sleeping = true
+			sleeping = false
 			pass
 		else:
-			sleeping = false
+			#sleeping = false
 			apply_central_force(applied_force)
 			apply_torque(rotation_speed*rotation_direction)
 
@@ -104,7 +106,9 @@ func _on_hit():
 	if invincible == true:
 		$invincible_animated.show()
 		$invincible_animated.play("invincible")
+		$hit_sprite.show()
 		await get_tree().create_timer(invinc_time).timeout
+		$hit_sprite.hide()
 		$invincible_animated.stop()
 		$invincible_animated.hide()
 		invincible = false

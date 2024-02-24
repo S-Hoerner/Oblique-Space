@@ -82,7 +82,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_vsf3j")
 }],
-"loop": true,
+"loop": false,
 "name": &"invincible",
 "speed": 8.0
 }]
@@ -112,8 +112,11 @@ animation = &"stop"
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_a6a7n")
 animation = &"invincible"
-frame = 1
 frame_progress = 0.941227
+
+[node name="hit_sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("8_vsf3j")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["player"]]
 position = Vector2(0, 13.36)
