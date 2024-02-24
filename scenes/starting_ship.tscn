@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcxc6w1u4vlnj"]
+[gd_scene load_steps=13 format=3 uid="uid://bcxc6w1u4vlnj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0trhl"]
 [ext_resource type="Texture2D" uid="uid://ce7si241hpaod" path="res://art/starting_ship/starting_ship_frame_1.png" id="2_bltik"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cl0sevxs1ypre" path="res://art/starting_ship/starting_ship_ccw_frame_2.png" id="5_335ad"]
 [ext_resource type="Texture2D" uid="uid://b2iuxddnuwd6j" path="res://art/starting_ship/starting_ship_cw_frame_2.png" id="6_544px"]
 [ext_resource type="Texture2D" uid="uid://bm5wuh834w8om" path="res://art/starting_ship/starting_ship_stop_frame_2.png" id="7_e7f5p"]
+[ext_resource type="Texture2D" uid="uid://b0g6arffiqs3f" path="res://art/starting_ship/starting_ship_invincible_frame_2.png" id="8_vsf3j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p7ouy"]
 animations = [{
@@ -72,8 +73,24 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="starting_ship" type="RigidBody2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6a7n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bltik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vsf3j")
+}],
+"loop": true,
+"name": &"invincible",
+"speed": 8.0
+}]
+
+[node name="starting_ship" type="RigidBody2D" groups=["player"]]
 gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("1_0trhl")
 
 [node name="linear_animated" type="AnimatedSprite2D" parent="."]
@@ -91,8 +108,18 @@ scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_tshkg")
 animation = &"stop"
 
+[node name="invincible_animated" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_a6a7n")
+animation = &"invincible"
+frame = 1
+frame_progress = 0.941227
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["player"]]
 position = Vector2(0, 13.36)
 polygon = PackedVector2Array(-12, 4, 12, 4, 16, 11, 23, 11, 25, 10, 1, -37, -1, -37, -25, 10, -23, 11, -15, 11)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="hit" from="." to="." method="_on_hit"]

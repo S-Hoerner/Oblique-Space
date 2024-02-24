@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://du42pahc3jk47" path="res://art/asteroids/asteroid_6.png" id="7_yi81f"]
 [ext_resource type="Texture2D" uid="uid://dj6wcjl3ayy22" path="res://art/asteroids/asteroid_7.png" id="8_mmifu"]
 
-[node name="asteroid" type="RigidBody2D"]
+[node name="asteroid" type="RigidBody2D" groups=["dangers"]]
 gravity_scale = 0.0
 script = ExtResource("1_nstev")
 metadata/_edit_group_ = true
