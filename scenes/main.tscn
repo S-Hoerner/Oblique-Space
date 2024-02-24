@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c83b6qffsjxdw"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_dby3k"]
+[ext_resource type="PackedScene" uid="uid://ta676wjjouhp" path="res://scenes/starting_ship.tscn" id="2_kivmc"]
+[ext_resource type="PackedScene" uid="uid://ctkc6ibu78yaa" path="res://scenes/asteroid.tscn" id="2_yvcsk"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_dby3k")
+
+[node name="asteroid" parent="." instance=ExtResource("2_yvcsk")]
+position = Vector2(302, -111)
+
+[node name="asteroid2" parent="." instance=ExtResource("2_yvcsk")]
+position = Vector2(-157, -180)
+
+[node name="asteroid3" parent="." instance=ExtResource("2_yvcsk")]
+position = Vector2(177, 152)
+
+[node name="asteroid4" parent="." instance=ExtResource("2_yvcsk")]
+position = Vector2(-255, 91)
+
+[node name="starting_ship" parent="." instance=ExtResource("2_kivmc")]
+
+[node name="asteroid_spawn_timer" type="Timer" parent="."]
