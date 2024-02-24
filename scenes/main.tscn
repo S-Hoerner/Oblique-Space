@@ -21,4 +21,4 @@ position = Vector2(-255, 91)
 
 [node name="asteroid_spawn_timer" type="Timer" parent="."]
 
-[node name="starting_ship_rigidbody" parent="." instance=ExtResource("3_sw7o4")]
+[node name="starting_ship" parent="." instance=ExtResource("3_sw7o4")]

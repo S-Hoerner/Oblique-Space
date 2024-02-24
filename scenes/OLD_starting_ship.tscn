@@ -72,7 +72,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="starting_ship" type="CharacterBody2D"]
+[node name="OLD_starting_ship" type="CharacterBody2D"]
 disable_mode = 2
 motion_mode = 1
 script = ExtResource("1_kl8xy")

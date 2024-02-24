@@ -8,6 +8,9 @@ var linear_direction
 var rotation_direction
 var applied_force
 
+func _ready():
+	pass
+
 func _physics_process(delta):
 	get_direction()
 	
@@ -16,18 +19,18 @@ func _physics_process(delta):
 	applied_force = Vector2(0,speed).rotated(rotation)*linear_direction
 	
 	if Input.is_action_pressed("slow"):
+		sleeping = false
 		apply_central_force(applied_force/4)
 		apply_torque(rotation_speed*rotation_direction/4)
 		pass
 	elif Input.is_action_pressed("stop"):
-		#velocity.x = move_toward(velocity.x, 0, acceleration*(speed))
-		#velocity.y = move_toward(velocity.y, 0, acceleration*(speed))
+		#set_linear_damp(1)
+		sleeping = true
 		pass
 	else:
+		sleeping = false
 		apply_central_force(applied_force)
 		apply_torque(rotation_speed*rotation_direction)
-	
-	#move_and_slide()
 
 func animatate():
 	if Input.is_action_pressed("forward"):

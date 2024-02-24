@@ -2,7 +2,15 @@ extends RigidBody2D
 
 func _ready():
 	select_asteroid()
+	
 	rotation = randf() * (2*PI)
+	mass = (randi() % 25) + 1
+	
+	var rotation_direction = randi() % 3
+	if rotation_direction == 2:
+		rotation_direction = -1
+	set_constant_torque((randi() % 1000)*mass*rotation_direction)
+	
 
 func _process(delta):
 	pass
@@ -26,7 +34,6 @@ func select_asteroid():
 	$sprite_8.hide()
 	
 	var selected_asteroid = randi() %8
-	#print(selected_asteroid)
 	if selected_asteroid == 0:
 		$sprite_1.show()
 		$collision_1.disabled = false

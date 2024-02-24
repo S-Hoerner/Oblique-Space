@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://dj6wcjl3ayy22" path="res://art/asteroids/asteroid_7.png" id="8_mmifu"]
 
 [node name="asteroid" type="RigidBody2D"]
-mass = 0.03
 gravity_scale = 0.0
 script = ExtResource("1_nstev")
 metadata/_edit_group_ = true
