@@ -1,20 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://ta676wjjouhp"]
+[gd_scene load_steps=11 format=3 uid="uid://bcxc6w1u4vlnj"]
 
-[ext_resource type="Texture2D" uid="uid://ce7si241hpaod" path="res://art/starting_ship/starting_ship_frame_1.png" id="1_atity"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_vm0l1"]
-[ext_resource type="Texture2D" uid="uid://burmakx74pih4" path="res://art/starting_ship/starting_ship_back_frame_2.png" id="3_smmju"]
-[ext_resource type="Texture2D" uid="uid://cl0sevxs1ypre" path="res://art/starting_ship/starting_ship_ccw_frame_2.png" id="4_46lss"]
-[ext_resource type="Texture2D" uid="uid://dgbooo7ahg78v" path="res://art/starting_ship/starting_ship_forward_frame_2.png" id="4_xo84h"]
-[ext_resource type="Texture2D" uid="uid://b2iuxddnuwd6j" path="res://art/starting_ship/starting_ship_cw_frame_2.png" id="5_jcxoc"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_0trhl"]
+[ext_resource type="Texture2D" uid="uid://ce7si241hpaod" path="res://art/starting_ship/starting_ship_frame_1.png" id="2_bltik"]
+[ext_resource type="Texture2D" uid="uid://burmakx74pih4" path="res://art/starting_ship/starting_ship_back_frame_2.png" id="3_5fut0"]
+[ext_resource type="Texture2D" uid="uid://dgbooo7ahg78v" path="res://art/starting_ship/starting_ship_forward_frame_2.png" id="4_t7u6w"]
+[ext_resource type="Texture2D" uid="uid://cl0sevxs1ypre" path="res://art/starting_ship/starting_ship_ccw_frame_2.png" id="5_335ad"]
+[ext_resource type="Texture2D" uid="uid://b2iuxddnuwd6j" path="res://art/starting_ship/starting_ship_cw_frame_2.png" id="6_544px"]
+[ext_resource type="Texture2D" uid="uid://bm5wuh834w8om" path="res://art/starting_ship/starting_ship_stop_frame_2.png" id="7_e7f5p"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lnpxe"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_p7ouy"]
 animations = [{
 "frames": [{
 "duration": 0.7,
-"texture": ExtResource("1_atity")
+"texture": ExtResource("2_bltik")
 }, {
 "duration": 0.7,
-"texture": ExtResource("3_smmju")
+"texture": ExtResource("3_5fut0")
 }],
 "loop": true,
 "name": &"back",
@@ -22,24 +23,24 @@ animations = [{
 }, {
 "frames": [{
 "duration": 0.6,
-"texture": ExtResource("1_atity")
+"texture": ExtResource("2_bltik")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_xo84h")
+"texture": ExtResource("4_t7u6w")
 }],
 "loop": true,
 "name": &"forward",
 "speed": 5.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_b212l"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_uodp0"]
 animations = [{
 "frames": [{
 "duration": 0.7,
-"texture": ExtResource("1_atity")
+"texture": ExtResource("2_bltik")
 }, {
 "duration": 0.7,
-"texture": ExtResource("4_46lss")
+"texture": ExtResource("5_335ad")
 }],
 "loop": true,
 "name": &"ccw",
@@ -47,30 +48,48 @@ animations = [{
 }, {
 "frames": [{
 "duration": 0.7,
-"texture": ExtResource("1_atity")
+"texture": ExtResource("2_bltik")
 }, {
 "duration": 0.7,
-"texture": ExtResource("5_jcxoc")
+"texture": ExtResource("6_544px")
 }],
 "loop": true,
 "name": &"cw",
 "speed": 5.0
 }]
 
-[node name="starting_ship" type="CharacterBody2D"]
-motion_mode = 1
-script = ExtResource("1_vm0l1")
-metadata/_edit_group_ = true
+[sub_resource type="SpriteFrames" id="SpriteFrames_tshkg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bltik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e7f5p")
+}],
+"loop": true,
+"name": &"stop",
+"speed": 5.0
+}]
+
+[node name="starting_ship" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_0trhl")
 
 [node name="linear_animated" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
-sprite_frames = SubResource("SpriteFrames_lnpxe")
+sprite_frames = SubResource("SpriteFrames_p7ouy")
 animation = &"back"
 
 [node name="rotation_animated" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
-sprite_frames = SubResource("SpriteFrames_b212l")
+sprite_frames = SubResource("SpriteFrames_uodp0")
 animation = &"ccw"
+
+[node name="stop_animated" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_tshkg")
+animation = &"stop"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["player"]]
 position = Vector2(0, 13.36)

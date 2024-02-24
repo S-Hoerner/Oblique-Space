@@ -1,33 +1,27 @@
-extends RigidBody2D
+extends CharacterBody2D
 
-
-@export var speed = 500
+@export var speed = 100
 @export var acceleration = 0.075
-@export var rotation_speed = 1000
+@export var rotation_speed = PI
 var linear_direction
 var rotation_direction
-var applied_force
 
 func _physics_process(delta):
 	get_direction()
 	
 	animatate()
 	
-	applied_force = Vector2(0,speed).rotated(rotation)*linear_direction
-	
 	if Input.is_action_pressed("slow"):
-		apply_central_force(applied_force/4)
-		apply_torque(rotation_speed*rotation_direction/4)
-		pass
+		velocity += transform.y * linear_direction * (acceleration * (speed/4))
+		rotation += rotation_direction * (rotation_speed/2) * delta
 	elif Input.is_action_pressed("stop"):
-		#velocity.x = move_toward(velocity.x, 0, acceleration*(speed))
-		#velocity.y = move_toward(velocity.y, 0, acceleration*(speed))
-		pass
+		velocity.x = move_toward(velocity.x, 0, acceleration*(speed))
+		velocity.y = move_toward(velocity.y, 0, acceleration*(speed))
 	else:
-		apply_central_force(applied_force)
-		apply_torque(rotation_speed*rotation_direction)
+		velocity += transform.y * linear_direction * (acceleration * speed)
+		rotation += rotation_direction * rotation_speed * delta
 	
-	#move_and_slide()
+	move_and_slide()
 
 func animatate():
 	if Input.is_action_pressed("forward"):
