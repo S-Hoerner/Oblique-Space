@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctkc6ibu78yaa"]
+[gd_scene load_steps=11 format=3 uid="uid://ctkc6ibu78yaa"]
 
 [ext_resource type="Texture2D" uid="uid://btgppyrb6liui" path="res://art/asteroids/asteroid_8.png" id="1_nigor"]
 [ext_resource type="Script" path="res://scripts/asteroid.gd" id="1_nstev"]
@@ -10,8 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://du42pahc3jk47" path="res://art/asteroids/asteroid_6.png" id="7_yi81f"]
 [ext_resource type="Texture2D" uid="uid://dj6wcjl3ayy22" path="res://art/asteroids/asteroid_7.png" id="8_mmifu"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uqqfp"]
+friction = 0.0
+
 [node name="asteroid" type="RigidBody2D" groups=["dangers"]]
+physics_material_override = SubResource("PhysicsMaterial_uqqfp")
 gravity_scale = 0.0
+continuous_cd = 2
 script = ExtResource("1_nstev")
 metadata/_edit_group_ = true
 

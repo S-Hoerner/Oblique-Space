@@ -3,6 +3,8 @@ extends RigidBody2D
 signal died
 signal hit
 
+@export var bullet_scene: PackedScene
+
 @export var speed = 500
 @export var acceleration = 0.075
 @export var rotation_speed = 1000
@@ -13,6 +15,7 @@ var rotation_direction
 var applied_force
 var dead
 var invincible
+var just_fired = false
 
 
 func _ready():
@@ -42,6 +45,8 @@ func _physics_process(delta):
 			#sleeping = false
 			apply_central_force(applied_force)
 			apply_torque(rotation_speed*rotation_direction)
+		if Input.is_action_pressed("attack") and $gun_timer.is_stopped():
+			fire_gun()
 
 func _on_body_entered(body):
 	if invincible == false:
@@ -112,3 +117,11 @@ func _on_hit():
 		$invincible_animated.stop()
 		$invincible_animated.hide()
 		invincible = false
+
+func fire_gun():
+	var bullet = bullet_scene.instantiate()
+	bullet.position = $bullet_spawn.position
+	bullet.set_linear_velocity(get_linear_velocity())
+	bullet.apply_impulse(Vector2(0,-speed*4).rotated(rotation))
+	add_child(bullet)
+	$gun_timer.start()

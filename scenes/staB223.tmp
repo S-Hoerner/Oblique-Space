@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bcxc6w1u4vlnj"]
+[gd_scene load_steps=15 format=3 uid="uid://bcxc6w1u4vlnj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0trhl"]
 [ext_resource type="Texture2D" uid="uid://ccuwx48t75m7c" path="res://art/starting_ship/basic_gun.png" id="2_46qq6"]
@@ -10,9 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://b2iuxddnuwd6j" path="res://art/starting_ship/starting_ship_cw_frame_2.png" id="6_544px"]
 [ext_resource type="Texture2D" uid="uid://bm5wuh834w8om" path="res://art/starting_ship/starting_ship_stop_frame_2.png" id="7_e7f5p"]
 [ext_resource type="Texture2D" uid="uid://b0g6arffiqs3f" path="res://art/starting_ship/starting_ship_invincible_frame_2.png" id="8_vsf3j"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dhoi6"]
-friction = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p7ouy"]
 animations = [{
@@ -93,7 +90,6 @@ animations = [{
 }]
 
 [node name="starting_ship" type="RigidBody2D" groups=["player"]]
-physics_material_override = SubResource("PhysicsMaterial_dhoi6")
 gravity_scale = 0.0
 continuous_cd = 2
 max_contacts_reported = 100
@@ -140,10 +136,6 @@ polygon = PackedVector2Array(-13, 3.64, 13, 3.64, 16, 11, 23, 11, 24, 9.64, 18, 
 
 [node name="bullet_spawn" type="Marker2D" parent="."]
 position = Vector2(-15, -9.41)
-
-[node name="gun_timer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="hit" from="." to="." method="_on_hit"]
