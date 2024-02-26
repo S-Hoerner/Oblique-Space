@@ -17,6 +17,8 @@ friction = 0.0
 physics_material_override = SubResource("PhysicsMaterial_uqqfp")
 gravity_scale = 0.0
 continuous_cd = 2
+max_contacts_reported = 100
+contact_monitor = true
 script = ExtResource("1_nstev")
 metadata/_edit_group_ = true
 
@@ -75,3 +77,5 @@ texture = ExtResource("1_nigor")
 
 [node name="collision_8" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(10, -49, 40, -44, 47, -22, 48, 3, 43, 30, 20, 44, -6, 48, -24, 37, -29, 18, -42, -7, -46, -24, -34, -43, -10, -49)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

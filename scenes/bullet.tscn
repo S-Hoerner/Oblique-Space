@@ -6,7 +6,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7riq6"]
 friction = 0.0
 
-[node name="bullet" type="RigidBody2D"]
+[node name="bullet" type="RigidBody2D" groups=["projectiles"]]
 mass = 0.01
 physics_material_override = SubResource("PhysicsMaterial_7riq6")
 gravity_scale = 0.0
