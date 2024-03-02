@@ -8,7 +8,7 @@ signal hit
 @export var speed = 500
 @export var acceleration = 0.075
 @export var rotation_speed = 1000
-@export var life = 10
+@export var life = 1000000
 @export var invinc_time = 0.1
 var linear_direction
 var rotation_direction
@@ -16,7 +16,6 @@ var applied_force
 var dead
 var invincible
 var just_fired = false
-
 
 func _ready():
 	player_not_dead()

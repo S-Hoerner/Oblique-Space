@@ -9,7 +9,7 @@ func _ready():
 	
 	sleeping = false
 	
-	rotation = randf() * (2*PI)
+	#rotation = randf() * (2*PI)
 	mass = (randi() % 25) + 1
 	
 	var rotation_direction = randi() % 3
@@ -76,6 +76,7 @@ func _on_body_entered(body):
 		asteroid_broken()
 
 func asteroid_broken():
-	sleeping = true
-	hide_all()
+	#sleeping = true
+	#hide_all()
 	emit_signal("asteroid_destroyed")
+	queue_free()

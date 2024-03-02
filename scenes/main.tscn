@@ -1,24 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://c83b6qffsjxdw"]
+[gd_scene load_steps=6 format=3 uid="uid://c83b6qffsjxdw"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dby3k"]
-[ext_resource type="PackedScene" uid="uid://ctkc6ibu78yaa" path="res://scenes/asteroid.tscn" id="2_yvcsk"]
+[ext_resource type="PackedScene" uid="uid://ctkc6ibu78yaa" path="res://scenes/asteroid.tscn" id="3_715l5"]
 [ext_resource type="PackedScene" uid="uid://bcxc6w1u4vlnj" path="res://scenes/starting_ship.tscn" id="3_sw7o4"]
+[ext_resource type="PackedScene" uid="uid://nna3rv4xw5mj" path="res://scenes/enemy_spawn_path.tscn" id="4_61g3o"]
+
+[sub_resource type="Curve2D" id="Curve2D_4hqbp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -881, -254, 0, 0, 0, 0, -465, 172, 0, 0, 0, 0, -679, 398, 0, 0, 0, 0, -881, -254)
+}
+point_count = 4
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dby3k")
 
 [node name="starting_ship" parent="." instance=ExtResource("3_sw7o4")]
+position = Vector2(1, 68)
 
-[node name="asteroid" parent="." instance=ExtResource("2_yvcsk")]
-position = Vector2(302, -111)
+[node name="asteroid" parent="." instance=ExtResource("3_715l5")]
+position = Vector2(0, -172)
 
-[node name="asteroid2" parent="." instance=ExtResource("2_yvcsk")]
-position = Vector2(-157, -180)
-
-[node name="asteroid3" parent="." instance=ExtResource("2_yvcsk")]
-position = Vector2(177, 152)
-
-[node name="asteroid4" parent="." instance=ExtResource("2_yvcsk")]
-position = Vector2(-255, 91)
-
-[node name="asteroid_spawn_timer" type="Timer" parent="."]
+[node name="enemy_spawn_path" parent="." instance=ExtResource("4_61g3o")]
+curve = SubResource("Curve2D_4hqbp")
