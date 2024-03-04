@@ -16,36 +16,53 @@ var applied_force
 var dead
 var invincible
 var just_fired = false
+var map_on = false
+var can_play = true
 
 func _ready():
 	player_not_dead()
 	$invincible_animated.hide()
+	$map_animated.hide()
 	$hit_sprite.hide()
+	#$world_camera.enabled = false
 
 func _physics_process(delta):
 	if dead == false:
-		get_direction()
+		if Input.is_action_just_released("map"):
+			if map_on == true:
+				can_play = false
+				$map_animated.show()
+				$map_animated.play("mapped")
+				$world_camera.enabled = true
+				$basic_camera.enabled = false
+			elif map_on == false:
+				can_play = true
+				$map_animated.hide()
+				$map_animated.stop()
+				$world_camera.enabled = false
+				$basic_camera.enabled = true
+			map_on = !map_on
 		
-		animatate()
-		
-		applied_force = Vector2(0,speed).rotated(rotation)*linear_direction
-		
-		if Input.is_action_pressed("slow"):
-			#sleeping = false
-			apply_central_force(applied_force/4)
-			apply_torque(rotation_speed*rotation_direction/4)
-			pass
-		elif Input.is_action_just_pressed("stop"):
-			#set_linear_damp(1)
-			sleeping = true
-			sleeping = false
-			pass
-		else:
-			#sleeping = false
-			apply_central_force(applied_force)
-			apply_torque(rotation_speed*rotation_direction)
-		if Input.is_action_pressed("attack") and $gun_timer.is_stopped():
-			fire_gun()
+		if can_play == true:
+			get_direction()
+			
+			animatate()
+			
+			applied_force = Vector2(0,speed).rotated(rotation)*linear_direction
+			
+			if Input.is_action_pressed("slow"):
+				apply_central_force(applied_force/4)
+				apply_torque(rotation_speed*rotation_direction/4)
+				pass
+			elif Input.is_action_just_pressed("stop"):
+				sleeping = true
+				sleeping = false
+				pass
+			else:
+				apply_central_force(applied_force)
+				apply_torque(rotation_speed*rotation_direction)
+			if Input.is_action_pressed("attack") and $gun_timer.is_stopped():
+				fire_gun()
 
 func _on_body_entered(body):
 	if invincible == false:

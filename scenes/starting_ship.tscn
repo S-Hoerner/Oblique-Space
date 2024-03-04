@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bcxc6w1u4vlnj"]
+[gd_scene load_steps=17 format=3 uid="uid://bcxc6w1u4vlnj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0trhl"]
 [ext_resource type="Texture2D" uid="uid://ccuwx48t75m7c" path="res://art/starting_ship/basic_gun.png" id="2_46qq6"]
@@ -92,6 +92,20 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_l3nje"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bltik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vsf3j")
+}],
+"loop": true,
+"name": &"mapped",
+"speed": 2.0
+}]
+
 [node name="starting_ship" type="RigidBody2D" groups=["player"]]
 physics_material_override = SubResource("PhysicsMaterial_dhoi6")
 gravity_scale = 0.0
@@ -127,6 +141,11 @@ sprite_frames = SubResource("SpriteFrames_a6a7n")
 animation = &"invincible"
 frame_progress = 0.941227
 
+[node name="map_animated" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_l3nje")
+animation = &"mapped"
+
 [node name="hit_sprite" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.05, 0.05)
@@ -136,7 +155,11 @@ texture = ExtResource("8_vsf3j")
 position = Vector2(0, 13.36)
 polygon = PackedVector2Array(-13, 3.64, 13, 3.64, 16, 11, 23, 11, 24, 9.64, 18, -2.36, 11, -16.36, 1, -36.36, -1, -36.36, -11, -16.36, -18, -16.36, -18, -2.36, -24, 9.64, -23, 11, -16, 10.64)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="world_camera" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(0.3, 0.3)
+
+[node name="basic_camera" type="Camera2D" parent="."]
 
 [node name="bullet_spawn" type="Marker2D" parent="."]
 position = Vector2(-15, -9.41)
